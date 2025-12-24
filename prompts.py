@@ -31,3 +31,7 @@ sys_msg_moderate_planner = SystemMessage(content=(
 sys_msg_moderate_router = SystemMessage(content=(
     "Deduce which llm would be best suited for each subtask. Choose between a reasoning model, coder model, tool calling model"
 ))
+
+sys_msg_moderate_executor = SystemMessage(content=(
+    "Execute the task detailed in each subtask. Call the necessary tools if necessary"
+))
