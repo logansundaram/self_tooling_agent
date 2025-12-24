@@ -4,38 +4,10 @@ from langgraph.graph import StateGraph, MessagesState, START, END
 from langchain_core.messages import HumanMessage, SystemMessage
 
 # can pivot to learned gates at a later time
-sys_msg_router = SystemMessage(content=(
-    "You are a routing module in a larger AI agent.\n"
-    "Return ONLY a single character: 1, 2, or 3.\n"
-    "1 = simple request (direct answer, no tools, no multi-step planning)\n"
-    "2 = moderate (some structure, a few steps, light tool use)\n"
-    "3 = complex (multi-component system design, many constraints, code, evaluation, self-repair loops)\n"
-    "No words, no punctuation, no explanation."
-))
+from prompts.system_prompts import sys_msg_router, sys_msg_simple
 
-sys_msg_simple = SystemMessage(content=(
-    "You are a Tier-1 execution model in a multi-tier AI agent.\n"
-    "This request has already been classified as SIMPLE.\n\n"
-    "Rules:\n"
-    "- Answer directly and concisely.\n"
-    "- Do NOT use tools.\n"
-    "- Do NOT plan or decompose the task.\n"
-    "- Do NOT mention routing, tiers, or internal agent structure.\n"
-    "- Do NOT ask follow-up questions.\n"
-    "- If formatting is requested, follow it exactly.\n"
-    "Goal:\n"
-    "Provide a correct, helpful response in a single pass."
-))
-
-router = ChatOllama(
-    model="ministral-3:8b",
-    temperature=0,
-)
-
-llm = ChatOllama(
-    model="gpt-oss:20b",
-    temperature=0,
-)
+#llms
+from llms import llm, router
 
 def llm_router(state: MessagesState):
     return {"messages": [router.invoke([sys_msg_router] + state["messages"])]}
