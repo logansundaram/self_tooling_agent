@@ -1,5 +1,5 @@
 from langgraph.graph import MessagesState
-from prompts.system_prompts import sys_msg_simple
+from prompts import sys_msg_simple
 
 def simple_node(llm):
     def _node(state: MessagesState):

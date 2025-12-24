@@ -1,6 +1,6 @@
 import re
 from langgraph.graph import MessagesState
-from prompts.system_prompts import sys_msg_router
+from prompts import sys_msg_router
 
 
 def llm_router(router):
