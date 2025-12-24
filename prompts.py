@@ -23,3 +23,11 @@ sys_msg_simple = SystemMessage(content=(
     "Goal:\n"
     "Provide a correct, helpful response in a single pass."
 ))
+
+sys_msg_moderate_planner = SystemMessage(content=(
+    "Break down the query and task into several bullet points"
+))
+
+sys_msg_moderate_router = SystemMessage(content=(
+    "Deduce which llm would be best suited for each subtask. Choose between a reasoning model, coder model, tool calling model"
+))
