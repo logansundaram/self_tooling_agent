@@ -1,4 +1,5 @@
 from langchain_ollama import ChatOllama
+from tools import tools
 
 router = ChatOllama(
     model="ministral-3:8b",
@@ -14,3 +15,10 @@ llm = ChatOllama(
     model="gpt-oss:20b",
     temperature=0,
 )
+
+llm_with_tools = ChatOllama(
+    model="gpt-oss:20b",
+    temperature=0,
+)
+
+llm_with_tools.bind_tools(tools)
