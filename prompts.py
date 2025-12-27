@@ -35,3 +35,15 @@ sys_msg_moderate_router = SystemMessage(content=(
 sys_msg_moderate_executor = SystemMessage(content=(
     "Execute the task detailed in each subtask. Call the necessary tools if necessary"
 ))
+
+sys_msg_moderate_verfifer = SystemMessage(content=(
+    "Verify that the task was completed successfully. Determine if retry is needed"
+))
+
+sys_msg_moderate_repair = SystemMessage(content=(
+    "Determine what went wrong in the previous execution and rerun with the necessary changes."
+))
+
+sys_msg_moderate_synthesizer = SystemMessage(content=(
+    "Combine the outputs of each individual subprompt and condense it into one correct output."
+))
