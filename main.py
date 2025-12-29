@@ -13,7 +13,7 @@ from router import llm_router, route
 
 from simple.node_simple import simple_node
 
-from graphs.moderate import moderate
+from graphs.moderate import subgraph_moderate
 
 def complex(state: MessagesState):
     return {"messages": [llm.invoke([sys_msg_simple] + state["messages"])]}
@@ -22,7 +22,7 @@ def complex(state: MessagesState):
 graph = StateGraph(MessagesState)
 graph.add_node("llm_router", llm_router(router))
 graph.add_node("simple", simple_node(llm))
-graph.add_node("moderate", moderate)
+graph.add_node("moderate", subgraph_moderate)
 graph.add_node("complex", complex)
 
 graph.add_edge(START, "llm_router")
@@ -43,7 +43,7 @@ graph.add_edge("complex", END)
 
 graph = graph.compile()
 
-messages = [HumanMessage(content="write a short story")]
+messages = [HumanMessage(content="give me a short prompt that is of moderate complexity")]
 out = graph.invoke({"messages": messages})
 
 for m in out["messages"]:

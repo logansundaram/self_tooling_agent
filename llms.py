@@ -1,5 +1,5 @@
 from langchain_ollama import ChatOllama
-from tools import tools
+from tool_registry.registry import tools
 
 router = ChatOllama(
     model="ministral-3:8b",
