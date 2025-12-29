@@ -13,7 +13,7 @@ from router import llm_router, route
 
 from simple.node_simple import simple_node
 
-from moderate.router import moderate
+from graphs.moderate import moderate
 
 def complex(state: MessagesState):
     return {"messages": [llm.invoke([sys_msg_simple] + state["messages"])]}
