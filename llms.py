@@ -21,4 +21,4 @@ llm_with_tools = ChatOllama(
     temperature=0,
 )
 
-llm_with_tools.bind_tools(tools)
+llm_with_tools = llm_with_tools.bind_tools(tools)

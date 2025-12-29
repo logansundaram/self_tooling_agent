@@ -43,7 +43,7 @@ graph.add_edge("complex", END)
 
 graph = graph.compile()
 
-messages = [HumanMessage(content="give me a short prompt that is of moderate complexity")]
+messages = [HumanMessage(content="write a prompt of medium complexity")]
 out = graph.invoke({"messages": messages})
 
 for m in out["messages"]:

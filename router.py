@@ -12,8 +12,13 @@ def llm_router(router):
 
 
 # routing function for conditional edges
-def route(state: MessagesState) -> str:
-    text = state["messages"][-1].content.strip()
-    m = re.search(r"[123]", text)
-    label = m.group(0) if m else "1"
-    return {"1": "simple", "2": "moderate", "3": "complex"}[label]
+import re
+
+def route(state):
+    raw = getattr(state["messages"][-1], "content", "")
+    raw = (raw or "").strip()
+
+    m = re.search(r"[123]", raw)
+    digit = m.group(0) if m else "2"
+
+    return {"1": "simple", "2": "moderate", "3": "complex"}[digit]

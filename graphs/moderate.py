@@ -10,7 +10,7 @@ from langgraph.graph import StateGraph, MessagesState, START, END
 
 from llms import llm, llm_with_tools
 
-subgraph_moderate_builder = StateGraph(StateGraph)
+subgraph_moderate_builder = StateGraph(MessagesState)
 
 subgraph_moderate_builder.add_node("moderate_planner", moderate_planner(llm))
 subgraph_moderate_builder.add_node("moderate_router", moderate_router(llm))
@@ -28,3 +28,4 @@ subgraph_moderate_builder.add_edge("moderate_verifier", "moderate_synthesizer")
 subgraph_moderate_builder.add_edge("moderate_synthesizer", END)
  
 subgraph_moderate = subgraph_moderate_builder.compile()  
+
