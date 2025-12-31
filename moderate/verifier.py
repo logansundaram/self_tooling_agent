@@ -12,7 +12,6 @@ def moderate_verifier(llm):
 
         print(f"[moderate_verifier] model={model} content_len={len(content)} tool_calls={bool(tool_calls)} preview={repr((msg.content or '')[:60])}")
 
-        # Drop empty *text* messages; keep tool-call messages
         if (not content) and (not tool_calls):
             print("[moderate_verifier] DROPPED empty message")
             return {"messages": []}

@@ -1,13 +1,14 @@
 import re
 from langgraph.graph import MessagesState
-from prompts import sys_msg_router
+from prompts import sys_msg_router, sys_msg_normalizer
 from state import AgentState
 
 
 def llm_router(router):
     def _node(state: AgentState):
         return {
-            "complexity": [router.invoke([sys_msg_router] + state["messages"])]
+            "complexity": [router.invoke([sys_msg_router] + state["messages"])],
+            "query": [router.invoke([sys_msg_normalizer] + state["messages"])]
         }
     return _node
 

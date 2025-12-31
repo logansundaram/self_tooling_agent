@@ -7,6 +7,14 @@ sys_msg_router = SystemMessage(content=(
     "No other text."
 ))
 
+sys_msg_normalizer = SystemMessage(content=(
+    "Normalize the prompt from the user"
+    "Correct any grammatical errors"
+    "Do not change the original intent of the query"
+    "Keep the changes minimal. Do not generate any additional text other than the normalized prompt"
+))
+
+
 sys_msg_simple = SystemMessage(content=(
     "SIMPLE request.\n"
     "Answer directly and concisely.\n"
