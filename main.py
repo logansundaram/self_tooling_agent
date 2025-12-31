@@ -17,7 +17,7 @@ from router import llm_router, route
 from simple.node_simple import simple_node
 
 from graphs.moderate import subgraph_moderate
-
+from graphs.simple import subgraph_simple
 
 
 
@@ -29,7 +29,8 @@ def build_graph():
     graph = StateGraph(AgentState)
 
     graph.add_node("llm_router", llm_router(router))
-    graph.add_node("simple", simple_node(llm_with_tools))
+    #change to subgraph_simple if necessary
+    graph.add_node("simple", subgraph_simple)
     graph.add_node("moderate", subgraph_moderate)
     graph.add_node("complex", complex_node)
 
@@ -50,6 +51,8 @@ def build_graph():
     graph.add_edge("complex", END)
 
     return graph.compile()
+
+
 def run_chatbot():
     graph = build_graph()
 
