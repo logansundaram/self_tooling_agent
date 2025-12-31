@@ -9,9 +9,24 @@ from langchain.tools import tool
 def search(expression: str) -> str:
     return expression
 
-@tool("add", description="Performs arithmetic additions. Use this for any math problems.")
+@tool("add", description="Performs arithmetic addition. Use this for any math problems.")
 def add(a: int, b : int) -> int:
     return a + b
+
+
+@tool("subtract", description="Performs arithmetic subtraction. Use this for any math problems.")
+def add(a: int, b : int) -> int:
+    return a + b
+
+
+@tool("multiplication", description="Performs arithmetic multiplication. Use this for any math problems.")
+def add(a: int, b : int) -> int:
+    return a + b
+
+
+@tool("division", description="Performs arithmetic division. Use this for any math problems.")
+def add(a: int, b : int) -> int:
+    return a/b
 
 
 tools = [search, add]
