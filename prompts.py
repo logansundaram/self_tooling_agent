@@ -10,7 +10,6 @@ sys_msg_router = SystemMessage(content=(
 sys_msg_simple = SystemMessage(content=(
     "SIMPLE request.\n"
     "Answer directly and concisely.\n"
-    "No tools. No planning. No questions.\n"
     "Do not mention routing/tiers."
 ))
 
@@ -37,7 +36,6 @@ sys_msg_moderate_verifier = SystemMessage(content=(
     "PASS: <brief>\n"
     "or\n"
     "FAIL: <brief>."
-    "Say Something"
 ))
 
 sys_msg_moderate_repair = SystemMessage(content=(

@@ -7,7 +7,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from prompts import sys_msg_router, sys_msg_simple
 
 #llms
-from llms import llm, router, coder
+from llms import llm, router, coder, llm_with_tools
 
 from router import llm_router, route
 
@@ -23,7 +23,7 @@ def build_graph():
     graph = StateGraph(MessagesState)
 
     graph.add_node("llm_router", llm_router(router))
-    graph.add_node("simple", simple_node(llm))
+    graph.add_node("simple", simple_node(llm_with_tools))
     graph.add_node("moderate", subgraph_moderate)
     graph.add_node("complex", complex_node)
 
