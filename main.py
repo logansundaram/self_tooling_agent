@@ -1,7 +1,10 @@
-import re
 from langchain_ollama import ChatOllama
 from langgraph.graph import StateGraph, MessagesState, START, END
 from langchain_core.messages import HumanMessage, SystemMessage
+
+#for the state of the graph
+from typing import TypedDict, NotRequired
+from state import AgentState
 
 # can pivot to learned gates at a later time
 from prompts import sys_msg_router, sys_msg_simple
@@ -15,12 +18,15 @@ from simple.node_simple import simple_node
 
 from graphs.moderate import subgraph_moderate
 
+
+
+
 def complex_node(state: MessagesState):
     return {"messages": [llm.invoke([sys_msg_simple] + state["messages"])]}
 
 
 def build_graph():
-    graph = StateGraph(MessagesState)
+    graph = StateGraph(AgentState)
 
     graph.add_node("llm_router", llm_router(router))
     graph.add_node("simple", simple_node(llm_with_tools))

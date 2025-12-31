@@ -1,12 +1,13 @@
 import re
 from langgraph.graph import MessagesState
 from prompts import sys_msg_router
+from state import AgentState
 
 
 def llm_router(router):
-    def _node(state: MessagesState):
+    def _node(state: AgentState):
         return {
-            "messages": [router.invoke([sys_msg_router] + state["messages"])]
+            "complexity": [router.invoke([sys_msg_router] + state["messages"])]
         }
     return _node
 
@@ -14,8 +15,8 @@ def llm_router(router):
 # routing function for conditional edges
 import re
 
-def route(state):
-    raw = getattr(state["messages"][-1], "content", "")
+def route(state: AgentState):
+    raw = getattr(state["complexity"][-1], "content", "")
     raw = (raw or "").strip()
 
     m = re.search(r"[123]", raw)
