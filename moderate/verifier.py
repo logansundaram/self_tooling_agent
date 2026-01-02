@@ -1,8 +1,8 @@
-from langgraph.graph import MessagesState
+from state import AgentState
 from prompts import sys_msg_moderate_verifier
 
 def moderate_verifier(llm):
-    def _node(state: MessagesState):
+    def _node(state: AgentState):
         msg = llm.invoke([sys_msg_moderate_verifier] + state["messages"][-2:])
 
         content = (getattr(msg, "content", "") or "").strip()

@@ -1,8 +1,12 @@
-from langgraph.graph import MessagesState
+from state import AgentState
 from prompts import sys_msg_moderate_planner
 
 def moderate_planner(llm):
-    def _node(state: MessagesState):
+    def _node(state: AgentState):
+
+        query = state["query"]
+
+        
         msg = llm.invoke([sys_msg_moderate_planner] + state["messages"][-2:])
 
         content = (getattr(msg, "content", "") or "").strip()

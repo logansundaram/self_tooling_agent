@@ -95,7 +95,6 @@ def run_chatbot():
         for m in messages[prev_len:]:
             m.pretty_print()
 
-        print(out["query"])
 
 if __name__ == "__main__":
     run_chatbot()

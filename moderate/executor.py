@@ -1,10 +1,10 @@
-from langgraph.graph import MessagesState
+from state import AgentState
 from langchain_core.messages import HumanMessage
 
 from prompts import sys_msg_moderate_executor
 
 def moderate_executor(llm_with_tools):
-    def _node(state: MessagesState):
+    def _node(state: AgentState):
         user_req = ""
         for m in reversed(state["messages"]):
             if m.__class__.__name__ == "HumanMessage":
