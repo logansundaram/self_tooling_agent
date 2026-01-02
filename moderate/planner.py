@@ -1,13 +1,25 @@
-from state import AgentState
+from state import AgentState, Subtask
 from prompts import sys_msg_moderate_planner
+from pydantic import BaseModel, Field
+
+class SubtaskPlanning(BaseModel):
+    #search_query: str = Field(None, description="Query that is optimized web search.")
+    subtasks: list[Subtask] = Field(
+        None, description="Output a list of independent subtasks"
+    )
 
 def moderate_planner(llm):
     def _node(state: AgentState):
 
-        query = state["query"]
+        #normalized query to be worked on
+        #query = state["query"]
 
-        
+        structured_llm = llm.with_structured_output(SubtaskPlanning)
+
+        output = structured_llm.invoke([sys_msg_moderate_planner] + state["messages"][-2:])
+
         msg = llm.invoke([sys_msg_moderate_planner] + state["messages"][-2:])
+
 
         content = (getattr(msg, "content", "") or "").strip()
         tool_calls = (getattr(msg, "additional_kwargs", {}) or {}).get("tool_calls")
@@ -22,6 +34,6 @@ def moderate_planner(llm):
 
         return {
             "messages": [msg],
-            "subtasks": [msg]
+            "subtasks": output
             }
     return _node

@@ -57,6 +57,7 @@ def run_chatbot():
     graph = build_graph()
 
     messages = []
+    out = []
 
     print("chatbot online\n")
 
@@ -79,8 +80,12 @@ def run_chatbot():
             print("(history cleared)\n")
             continue
 
-        if user_text.lower() == "history":
+        if user_text.lower() == "messages":
             print(messages)
+            continue
+
+        if user_text.lower() == "state":
+            print(out)
             continue
 
 
