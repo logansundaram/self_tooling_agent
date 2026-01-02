@@ -16,7 +16,6 @@ def moderate_planner(llm):
 
         plan = structured_llm.invoke([sys_msg_moderate_planner] + state["messages"][-2:])
 
-        print(plan["subtasks"])
         msg = llm.invoke([sys_msg_moderate_planner] + state["messages"][-2:])
 
 
@@ -32,6 +31,6 @@ def moderate_planner(llm):
             return {"messages": []}
 
         return {
-            "subtasks": [s.model_dump() for s in plan.subtasks]
+            "subtasks": plan.subtasks
             }
     return _node
