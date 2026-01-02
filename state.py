@@ -2,12 +2,11 @@ from langgraph.graph import MessagesState
 from typing import TypedDict
 
 class Subtask(TypedDict):
-    id: int
-    fn: str
-    subq: str
+    task: str
     answer: str
+    check: str = ""
 
-    
+
 class AgentState(MessagesState):
     complexity: str
     query: str
