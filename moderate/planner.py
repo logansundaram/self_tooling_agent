@@ -16,5 +16,8 @@ def moderate_planner(llm):
             print("[moderate_planner] DROPPED empty message")
             return {"messages": []}
 
-        return {"messages": [msg]}
+        return {
+            "messages": [msg],
+            "subtasks": [msg]
+            }
     return _node

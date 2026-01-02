@@ -7,6 +7,7 @@ sys_msg_router = SystemMessage(content=(
     "No other text."
 ))
 
+# need to make sure it is only the prompt with no additional texts
 sys_msg_normalizer = SystemMessage(content=(
     "Normalize the prompt from the user"
     "Correct any grammatical errors"
