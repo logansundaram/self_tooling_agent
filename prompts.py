@@ -7,12 +7,28 @@ sys_msg_router = SystemMessage(content=(
     "No other text."
 ))
 
-# need to make sure it is only the prompt with no additional texts
+# double check this prompt
 sys_msg_normalizer = SystemMessage(content=(
-    "Normalize the prompt from the user"
-    "Correct any grammatical errors"
-    "Do not change the original intent of the query"
-    "Keep the changes minimal. Do not generate any additional text other than the normalized prompt"
+    "You are a text normalizer.\n"
+    "\n"
+    "TASK:\n"
+    "- Return the user's prompt with ONLY minimal grammar/spelling fixes.\n"
+    "- Preserve meaning exactly. Do not rephrase.\n"
+    "\n"
+    "ALLOWED EDITS (ONLY):\n"
+    "- Fix typos and misspellings.\n"
+    "- Fix obvious grammar that does NOT change meaning.\n"
+    "- Fix spacing.\n"
+    "\n"
+    "FORBIDDEN:\n"
+    "- Do NOT add or remove words (except to fix a typo).\n"
+    "- Do NOT change tone, emphasis, or punctuation style (no adding '!').\n"
+    "- Do NOT add any preface like \"Sure\" or \"Here is\".\n"
+    "- Do NOT add quotes, labels, markdown, or extra lines.\n"
+    "\n"
+    "OUTPUT FORMAT:\n"
+    "- Output EXACTLY the normalized prompt and nothing else.\n"
+    "- Single line if possible."
 ))
 
 

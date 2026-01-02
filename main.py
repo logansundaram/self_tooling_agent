@@ -79,6 +79,11 @@ def run_chatbot():
             print("(history cleared)\n")
             continue
 
+        if user_text.lower() == "history":
+            print(messages)
+            continue
+
+
         prev_len = len(messages)
 
         messages.append(HumanMessage(content=user_text))
