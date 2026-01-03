@@ -14,7 +14,7 @@ from langchain_tavily import TavilySearch
 #    print("tool called")
 #    return str(eval(expression))
 
-tool = TavilySearch(
+search = TavilySearch(
     max_results=5, #may be too many
     topic="general",
     # include_answer=False,
@@ -27,10 +27,10 @@ tool = TavilySearch(
     # exclude_domains=None
     )
 
-@tool("search", description="Perform an online search. Use this for any instance when specific info is necessary")
-def search(query: str) -> str:
+#@tool("search", description="Perform an online search. Use this for any instance when specific info is necessary")
+#def search(query: str) -> str:
     
-    return tool
+    #return tool
 
 @tool("add", description="Performs arithmetic addition. Use this for any math problems.")
 def add(a: int, b : int) -> int:

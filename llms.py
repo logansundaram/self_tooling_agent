@@ -19,6 +19,7 @@ llm = ChatOllama(
 llm_with_tools = ChatOllama(
     model="gpt-oss:20b",
     temperature=0,
+    streaming = False,
 )
 
 llm_with_tools = llm_with_tools.bind_tools(tools)
