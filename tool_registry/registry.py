@@ -37,7 +37,7 @@ search = TavilySearch(
     #return tool
 
 
-@tool("retrieve info", description="Search and return information from uploaded documents")
+@tool("retrieve_info", description="Search ONLY the local vector database / uploaded documents. Input must be plain text.")
 def retrieve_info(query: str) -> str:
     retriever = vector_store.as_retriever(search_kwargs={"k": 8})
     docs = retriever.invoke(query)
