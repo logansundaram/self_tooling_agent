@@ -29,8 +29,9 @@ def moderate_planner(llm):
         if (not content) and (not tool_calls):
             print("[moderate_planner] DROPPED empty message")
             return {"messages": []}
-
+        print(plan.subtasks)
         return {
             "subtasks": plan.subtasks
             }
+    
     return _node

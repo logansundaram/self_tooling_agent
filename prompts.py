@@ -70,7 +70,7 @@ sys_msg_moderate_planner = SystemMessage(content=(
     "\n"
     "MINIMALITY RULE:\n"
     "- Do NOT decompose if a single task is sufficient.\n"
-    "- If decomposition helps, use only 3–5 subtasks. No more.\n"
+    "- If decomposition helps, use only 2-4 subtasks. No more.\n"
     "\n"
     "INDEPENDENCE RULE:\n"
     "- Each subtask must be solvable using ONLY the original user prompt + conversation context.\n"
