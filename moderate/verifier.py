@@ -1,20 +1,20 @@
 from state import AgentState
 from prompts import sys_msg_moderate_verifier
+from pydantic import Field, BaseModel
+from typing import List
+
+
+class Check(BaseModel):
+    valid: bool = Field(..., description="Return a true or false bool if the output matches the requierments of the check. Return true if in doubt")
 
 def moderate_verifier(llm):
     def _node(state: AgentState):
-        msg = llm.invoke([sys_msg_moderate_verifier] + state["messages"][-2:])
+        structured_llm = llm.with_structured_output(Check)
 
-        content = (getattr(msg, "content", "") or "").strip()
-        tool_calls = (getattr(msg, "additional_kwargs", {}) or {}).get("tool_calls")
-        model = (getattr(msg, "response_metadata", {}) or {}).get("model") or \
-                (getattr(msg, "response_metadata", {}) or {}).get("model_name") or "unknown_model"
+        updated = state["subtasks"]
+        for subtask in updated:
+            check = structured_llm.invoke([sys_msg_moderate_verifier] + [subtask.check] + [subtask.answer])
+            subtask.check = check
 
-        print(f"[moderate_verifier] model={model} content_len={len(content)} tool_calls={bool(tool_calls)} preview={repr((msg.content or '')[:60])}")
-
-        if (not content) and (not tool_calls):
-            print("[moderate_verifier] DROPPED empty message")
-            return {"messages": []}
-
-        return {"messages": [msg]}
+        return {"subtasks" : updated}
     return _node

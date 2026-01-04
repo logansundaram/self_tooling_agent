@@ -1,9 +1,18 @@
 from state import AgentState
 from prompts import sys_msg_moderate_synthesizer
+from langchain_core.messages import HumanMessage
+from state import Subtask
 
 def moderate_synthesizer(llm):
     def _node(state: AgentState):
-        msg = llm.invoke([sys_msg_moderate_synthesizer] + state["messages"][-2:])
+
+        combined_tasks = ""
+        for subtask in state["subtasks"]:
+            combined_tasks += subtask.task
+           
+
+
+        msg = llm.invoke([sys_msg_moderate_synthesizer] + [combined_tasks])
 
         content = (getattr(msg, "content", "") or "").strip()
         tool_calls = (getattr(msg, "additional_kwargs", {}) or {}).get("tool_calls")
