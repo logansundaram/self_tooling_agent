@@ -1,11 +1,7 @@
-from langchain_ollama import ChatOllama
-
-from langchain_ollama import OllamaEmbeddings
-
-from tool_registry.registry import tools
+from langchain_ollama import ChatOllama, OllamaEmbeddings
 
 embeddings = OllamaEmbeddings(
-    model = "nomic-embed-text:v1.5"
+    model = "nomic-embed-text:v1.5",
 )
 
 router = ChatOllama(
@@ -29,4 +25,3 @@ llm_with_tools = ChatOllama(
     streaming = False,
 )
 
-llm_with_tools = llm_with_tools.bind_tools(tools)

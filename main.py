@@ -19,7 +19,9 @@ from simple.node_simple import simple_node
 from graphs.moderate import subgraph_moderate
 from graphs.simple import subgraph_simple
 
+from tool_registry.registry import tools
 
+llm_with_tools = llm_with_tools.bind_tools(tools)
 
 def complex_node(state: MessagesState):
     return {"messages": [llm.invoke([sys_msg_simple] + state["messages"])]}
