@@ -8,7 +8,7 @@ def moderate_synthesizer(llm):
 
         combined_tasks = ""
         for subtask in state["subtasks"]:
-            combined_tasks += subtask.task
+            combined_tasks += subtask.answer
            
 
 

@@ -5,12 +5,13 @@ from moderate.repair import moderate_repair
 from moderate.verifier import moderate_verifier
 from moderate.synthesizer import moderate_synthesizer
 
-from langgraph.graph import StateGraph, MessagesState, START, END
+from langgraph.graph import StateGraph, START, END
+from state import AgentState
 
 
 from llms import llm, llm_with_tools
 
-subgraph_moderate_builder = StateGraph(MessagesState)
+subgraph_moderate_builder = StateGraph(AgentState)
 
 subgraph_moderate_builder.add_node("moderate_planner", moderate_planner(llm))
 #subgraph_moderate_builder.add_node("moderate_router", moderate_router(llm))

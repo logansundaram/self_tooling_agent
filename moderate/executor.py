@@ -9,12 +9,12 @@ def moderate_executor(llm_with_tools):
     def _node(state: AgentState):
         updated = state["subtasks"]
     
-        i = 0
+        #i = 0
         for subtask in updated:
-            subtask.answer = llm_with_tools.invoke([sys_msg_moderate_executor] + state["messages"][-2:] + [HumanMessage(content=subtask.task)]).content
-            print(f"task\n{i}")
-            i=i+1
-            print(subtask.answer)
-            
+            subtask.answer = llm_with_tools.invoke([sys_msg_moderate_executor] + [HumanMessage(content=subtask.task)]).content
+            #print(f"task\n{i}")
+            #i=i+1
+            #print(subtask.answer)
+            # + state["messages"][-2:] 
         return {"subtasks": updated}
     return _node

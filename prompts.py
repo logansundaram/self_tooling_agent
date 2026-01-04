@@ -51,7 +51,7 @@ sys_msg_simple_synthesize = SystemMessage(
         "- DO NOT mention tools, tool calls, or internal agent steps.\n"
         "- DO NOT repeat raw tool outputs verbatim unless required for correctness.\n\n"
         "Guidelines:\n"
-        "- Integrate tool results into a clear, concise, and natural-language response.\n"
+        "- Integrate results into a clear, concise, and natural-language response.\n"
         "- Resolve conflicts or ambiguities in tool outputs using best judgment.\n"
         "- If tool outputs are insufficient or inconclusive, state this clearly and conservatively.\n"
         "- Prefer correctness and clarity over verbosity.\n\n"

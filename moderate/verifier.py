@@ -12,12 +12,10 @@ def moderate_verifier(llm):
         structured_llm = llm.with_structured_output(Check)
 
         updated = state["subtasks"]
-        print("verifier nhode")
-        print(updated)
         #needs to have  proper handling of the check subfield in state
         for subtask in updated:
             check = structured_llm.invoke([sys_msg_moderate_verifier] + [subtask.task] + [subtask.answer])
-            subtask.check = check
+            subtask.check = check.valid
 
         return {"subtasks" : updated}
     return _node
