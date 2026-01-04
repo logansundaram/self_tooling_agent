@@ -7,7 +7,7 @@ from prompts import sys_msg_moderate_executor
 
 def moderate_executor(llm_with_tools):
     def _node(state: AgentState):
-        updated: list[Subtask] = state["subtasks"]
+        updated = state["subtasks"]
     
         i = 0
         for subtask in updated:
