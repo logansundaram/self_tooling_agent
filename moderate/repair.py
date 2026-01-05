@@ -10,6 +10,5 @@ def repair_routing_function(state: AgentState) -> bool:
 def moderate_repair(llm):
     def _node(state: AgentState):
         msg = llm.invoke([sys_msg_moderate_repair] + state["messages"][-2:])
-
         return {"messages": [msg]}
     return _node
