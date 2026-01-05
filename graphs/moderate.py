@@ -17,22 +17,20 @@ subgraph_moderate_builder = StateGraph(AgentState)
 subgraph_moderate_builder.add_node("moderate_planner", moderate_planner(llm))
 #subgraph_moderate_builder.add_node("moderate_router", moderate_router(llm))
 subgraph_moderate_builder.add_node("moderate_executor", moderate_executor(llm_with_tools))
-subgraph_moderate_builder.add_node("moderate_repair", moderate_repair(llm))
+subgraph_moderate_builder.add_node("moderate_repair", moderate_repair(llm_with_tools))
 subgraph_moderate_builder.add_node("moderate_verifier", moderate_verifier(llm))
 subgraph_moderate_builder.add_node("moderate_synthesizer", moderate_synthesizer(llm))
 
 subgraph_moderate_builder.add_edge(START, "moderate_planner")
-#subgraph_moderate_builder.add_edge("moderate_planner", "moderate_router")
 #subgraph_moderate_builder.add_edge("moderate_router", "moderate_executor")
-#subgraph_moderate_builder.add_edge("moderate_planner", "moderate_repair")
-#subgraph_moderate_builder.add_edge("moderate_executor", "moderate_repair")
-#subgraph_moderate_builder.add_edge("moderate_repair", "moderate_verifier")
+
 
 
 subgraph_moderate_builder.add_edge("moderate_planner", "moderate_executor")
+#need a react loop here
 subgraph_moderate_builder.add_edge("moderate_executor", "moderate_verifier")
 
-
+#need a loop here to check robustness
 subgraph_moderate_builder.add_conditional_edges("moderate_verifier", repair_routing_function,
                                                 {
                                                     True: "moderate_synthesizer",

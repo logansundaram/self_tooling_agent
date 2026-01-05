@@ -7,8 +7,11 @@ def repair_routing_function(state: AgentState) -> bool:
             return False
     return True
 
-def moderate_repair(llm):
+def moderate_repair(llm_with_tools):
     def _node(state: AgentState):
-        msg = llm.invoke([sys_msg_moderate_repair] + state["messages"][-2:])
-        return {"messages": [msg]}
+        updated = state["subtasks"]
+        for subtask in updated:
+                if not subtask.verdict:
+                    subtask.answer = llm_with_tools.invoke([sys_msg_moderate_repair] + [subtask.check] + [subtask.task]).content
+        return {"subtasks": updated}
     return _node

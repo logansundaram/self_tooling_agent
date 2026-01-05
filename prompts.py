@@ -115,12 +115,13 @@ sys_msg_moderate_verifier = SystemMessage(content=(
 ))
 
 sys_msg_moderate_repair = SystemMessage(content=(
-    "Fix ONLY issues from FAIL feedback.\n"
-    "Re-run only necessary parts.\n"
+    "Fix issues based on the requirements outlined.\n"
     "Output corrected result."
 ))
 
 sys_msg_moderate_synthesizer = SystemMessage(content=(
     "Combine verified outputs into the final answer.\n"
     "No redundancy. Clear and concise."
+    "Do not make up info."
+    "If detail is need to fill in the blank, keep it general."
 ))
