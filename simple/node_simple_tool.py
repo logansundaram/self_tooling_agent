@@ -9,5 +9,5 @@ def simple_node_tool():
             tool = tools_by_name[tool_call["name"]]
             observation = tool.invoke(tool_call["args"])
             result.append(ToolMessage(content=observation, tool_call_id=tool_call["id"]))
-        return {"messages": [result]}
+        return {"messages": result}
     return _node

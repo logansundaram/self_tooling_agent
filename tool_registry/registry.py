@@ -18,23 +18,12 @@ from langchain_tavily import TavilySearch
 #    print("tool called")
 #    return str(eval(expression))
 
-search = TavilySearch(
-    max_results=5, #may be too many
-    topic="general",
-    # include_answer=False,
-    # include_raw_content=False,
-    # include_images=False,
-    # include_image_descriptions=False,
-    # search_depth="basic",
-    # time_range="day",
-    # include_domains=None,
-    # exclude_domains=None
-    )
+tavily = TavilySearch(max_results=5, topic="general")
 
-#@tool("search", description="Perform an online search. Use this for any instance when specific info is necessary")
-#def search(query: str) -> str:
-    
-    #return tool
+@tool("web_search", description="Perform an online search.")
+def web_search(query: str) -> str:
+    return tavily.invoke({"query": query})
+
 
 
 @tool("retrieve_info", description="Search ONLY the local vector database / uploaded documents. Input must be plain text.")
@@ -64,5 +53,5 @@ def division(a: int, b : int) -> int:
     return a/b
 
 
-tools = [search, add, retrieve_info]
+tools = [web_search, add, retrieve_info]
 tools_by_name = {tool.name: tool for tool in tools}
