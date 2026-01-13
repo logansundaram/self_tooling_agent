@@ -1,0 +1,2 @@
+make modular subgraphs to be used within bigger ovaraching subgraphs
+make nodes take in llm + system prompt for simpler nodes
